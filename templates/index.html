@@ -10,17 +10,17 @@
 <body>
 
   <div style='width:800px'>
-    <canvas id="canvas"></canvas></div>
+    <canvas id="canvas" data-endpoint='{{CHART_ENDPOINT}}'></canvas></div>
   </div>
 
   <script type='text/javascript'>
-    var CHART_ENDPOINT = '{{CHART_ENDPOINT}}'
-    
-    var ctx = document.getElementById('canvas').getContext('2d');
+
+    var ctx = document.getElementById('canvas');
+
     mychart = create_chart(ctx);
 
     window.onload = function () { 
-      add_line(mychart, CHART_ENDPOINT);
+      add_line(mychart)
     };
 
   </script>

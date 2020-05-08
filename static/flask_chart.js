@@ -45,15 +45,20 @@ function getRandomColor() {
 
 function create_chart(ctx, unit = 'day'){
   config.options.scales.xAxes[0].time.unit = unit;
-  return new Chart(ctx, config);
+  config.endpoint = ctx.dataset.endpoint;
+  return new Chart(ctx.getContext('2d'), config);
 }
 
-function add_line(chart, endpoint) {
+function add_line(chart, q = false) {
   
-  var url = new URL("http://" + window.location.host + endpoint);
-  // params = {'q': q}
-  // Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-  
+  var url = new URL("http://" + window.location.host + chart.config.endpoint),
+  params = {'q': q}
+
+  // If q is provided, add this to the URL
+  if (q != false){
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+  }
+
   fetch(url)
     .then((response) => {
       return response.json();
