@@ -15,9 +15,16 @@ def conv(epoch):
 
 @app.route('/data')
 def data():
-    d =  [ {'x': conv(1588745371), 'y': 400},
-           {'x': conv(1588845371), 'y': 500},
-           {'x': conv(1588946171), 'y': 800} ]
+    d = {'datasets':
+            [
+                {'title': 'From Dict',
+                 'data': [ {'x': conv(1588745371), 'y': 400},
+                           {'x': conv(1588845371), 'y': 500},
+                           {'x': conv(1588946171), 'y': 800} ]
+                },
+            ]
+         }
+
     return jsonify(d)
 ```
 Now in the template you can place the chart's canvas element with `data-endpoint` attribute:
