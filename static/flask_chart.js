@@ -1,25 +1,26 @@
-var config = {
-  type: 'line',
-  data: {
-    datasets: []
-  },
-  options: {
-    scales: {
-      xAxes: [{
-        type: 'time',
-        time: {
-          unit: 'day'
-        },
-      },],
-      yAxes: [{
-        display: true,
-        // type: 'logarithmic',
-      }]
+function getConfig(){
+  return {
+    type: 'line',
+    data: {
+      datasets: []
     },
-    responsive: true
-  }
-};
-
+    options: {
+      scales: {
+        xAxes: [{
+          type: 'time',
+          time: {
+            unit: 'day'
+          },
+        },],
+        yAxes: [{
+          display: true,
+          // type: 'logarithmic',
+        }]
+      },
+      responsive: true
+    }
+  };
+}
 ////
 
 Array.prototype.convertData = function() {
@@ -44,8 +45,14 @@ function getRandomColor() {
 }
 
 function create_chart(ctx, unit = 'day'){
+
+  config = getConfig()
+
   config.options.scales.xAxes[0].time.unit = unit;
+
+  // Assign endpoint from 'data-endpoint' attrib to config object
   config.endpoint = ctx.dataset.endpoint;
+
   return new Chart(ctx.getContext('2d'), config);
 }
 
@@ -59,11 +66,14 @@ function load_data(chart, q = false) {
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
   }
 
+  // Run the API call.
   fetch(url)
     .then((response) => {
       return response.json();
     })
     .then((resp_data) => {
+
+      // Push this data to the config object of this chart.
       resp_data.datasets.forEach((dataSet) => {
         chart.data.datasets.push({
           label: dataSet['title'],
@@ -72,6 +82,9 @@ function load_data(chart, q = false) {
           backgroundColor: getRandomColor(),
         })
       });
+
+      // Finally update that visual chart
       chart.update();
+
     });
 };

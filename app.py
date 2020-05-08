@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, url_for
+from flask import Flask, render_template, jsonify, url_for, request
 
 import datetime as DT
 def conv(epoch):
@@ -48,9 +48,30 @@ def data():
 
                 {'title': 'From CSV',
                  'data': csv_to_points(sample_csv)
-                },
+                }
             ],
         }
 
     return jsonify(d)
 
+@app.route('/dynamic')
+def dynamic():
+    """ This route is an example of receiving data from the frontend """
+
+    q = request.args.get('q')
+
+    print (q)
+
+    # You could dynamically build the following result now
+    # based on the value of `q` which is passed from the frontend.
+    # Here we just set that to the title.
+
+    d = {'datasets':
+            [
+                {'title': q,
+                 'data': sample_list,
+                },
+            ],
+        }
+
+    return jsonify(d)

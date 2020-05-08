@@ -9,19 +9,33 @@
   </head>
 <body>
 
-  <div style='width:800px'>
-    <canvas id="canvas" data-endpoint='{{CHART_ENDPOINT}}'></canvas></div>
+  <div style='width:400px'>
+    <canvas id="canvas" data-endpoint='{{CHART_ENDPOINT}}'></canvas>
+  
+
+    <!-- don't bother receiving the endpoint from flask for this one -->
+    <canvas id="dynamic" data-endpoint='/dynamic'></canvas>
   </div>
 
   <script type='text/javascript'>
 
     var ctx = document.getElementById('canvas');
 
-    mychart = create_chart(ctx);
+    myChart = create_chart(ctx);
+
+    // Now for the dynamic one:
+
+    var dynamicCtx = document.getElementById('dynamic');
+    
+    dynamicChart = create_chart(dynamicCtx);
 
     window.onload = function () { 
-      load_data(mychart)
+      load_data(myChart)
+
+      load_data(dynamicChart, 'query_string')
+      
     };
+
 
   </script>
 
