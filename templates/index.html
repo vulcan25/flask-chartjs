@@ -12,12 +12,13 @@
   <div style='width:400px'>
     <canvas id="canvas" data-endpoint='{{CHART_ENDPOINT}}'></canvas>
   
-
     <!-- don't bother receiving the endpoint from flask for this one -->
     <canvas id="dynamic" data-endpoint='/dynamic'></canvas>
   </div>
 
   <script type='text/javascript'>
+
+    // First Chart
 
     var ctx = document.getElementById('canvas');
 
@@ -26,16 +27,15 @@
     // Now for the dynamic one:
 
     var dynamicCtx = document.getElementById('dynamic');
-    
+
     dynamicChart = create_chart(dynamicCtx);
 
-    window.onload = function () { 
+    window.onload = function() {
       load_data(myChart)
 
       load_data(dynamicChart, 'query_string')
-      
-    };
 
+    };
 
   </script>
 

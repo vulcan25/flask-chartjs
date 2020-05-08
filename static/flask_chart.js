@@ -1,4 +1,4 @@
-function getConfig(){
+function getConfig() {
   return {
     type: 'line',
     data: {
@@ -11,7 +11,7 @@ function getConfig(){
           time: {
             unit: 'day'
           },
-        },],
+        }, ],
         yAxes: [{
           display: true,
           // type: 'logarithmic',
@@ -35,19 +35,20 @@ Array.prototype.convertData = function() {
 }
 
 function getRandomColor() {
-    // Function to generate random color for the lines.
-    var letters = '0123456789ABCDEF'.split('');
-    var color = '#';
-    for (var i = 0; i < 6; i++ ) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
+  // Function to generate random color for the lines.
+  var letters = '0123456789ABCDEF'.split('');
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }
 
-function create_chart(ctx, unit = 'day'){
+function create_chart(ctx, unit = 'day') {
 
   config = getConfig()
 
+  // Set unit
   config.options.scales.xAxes[0].time.unit = unit;
 
   // Assign endpoint from 'data-endpoint' attrib to config object
@@ -57,12 +58,14 @@ function create_chart(ctx, unit = 'day'){
 }
 
 function load_data(chart, q = false) {
-  
+
   var url = new URL("http://" + window.location.host + chart.config.endpoint),
-  params = {'q': q}
+    params = {
+      'q': q
+    }
 
   // If q is provided, add this to the URL
-  if (q != false){
+  if (q != false) {
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
   }
 
