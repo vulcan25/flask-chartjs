@@ -47,7 +47,8 @@ def data():
                 },
 
                 {'title': 'From CSV',
-                 'data': csv_to_points(sample_csv)}
+                 'data': csv_to_points(sample_csv)
+                },
             ],
         }
 

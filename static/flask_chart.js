@@ -49,7 +49,7 @@ function create_chart(ctx, unit = 'day'){
   return new Chart(ctx.getContext('2d'), config);
 }
 
-function add_line(chart, q = false) {
+function load_data(chart, q = false) {
   
   var url = new URL("http://" + window.location.host + chart.config.endpoint),
   params = {'q': q}
