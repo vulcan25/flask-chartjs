@@ -22,19 +22,10 @@
 
     var ctx = document.getElementById('canvas');
 
-    myChart = create_chart(ctx);
-
-    // Now for the dynamic one:
-
-    var dynamicCtx = document.getElementById('dynamic');
-
-    dynamicChart = create_chart(dynamicCtx);
+    myChart = create_chart(ctx, unit='month');
 
     window.onload = function() {
       load_data(myChart)
-
-      load_data(dynamicChart, 'query_string')
-
     };
 
   </script>
