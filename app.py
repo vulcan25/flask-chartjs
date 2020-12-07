@@ -11,8 +11,6 @@ prices = [1.4, 2.5, 9.6]
 
 sample_list =[dict(x=conv(date), y=prices[idx]) for idx,date in enumerate(dates)]
 
-print( sample_list)
-exit()
 app = Flask(__name__)
 
 # Disable caching of staic assets; useful for dev
